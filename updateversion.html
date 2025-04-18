@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Développeuse Fullstack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Dark theme (default) */
+            --bg-color: #0f0f0f;
+            --text-color: #f5f5f5;
+            --accent-color: #64ffda;
+            --secondary-color: #8892b0;
+            --hover-color: rgba(100, 255, 218, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --header-bg: rgba(15, 15, 15, 0.9);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f5f5f5;
+            --text-color: #0f0f0f;
+            --accent-color: #0a9b78;
+            --secondary-color: #6b7280;
+            --hover-color: rgba(10, 155, 120, 0.1);
+            --card-bg: rgba(0, 0, 0, 0.03);
+            --header-bg: rgba(245, 245, 245, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 8rem 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero {
+            padding-top: 10rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .accent {
+            color: var(--accent-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--hover-color);
+            transform: translateY(-3px);
+        }
+
+        /* Theme & Language toggles */
+        .toggles {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-right: 2rem;
+        }
+
+        .theme-toggle,
+        .lang-toggle {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover,
+        .lang-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        /* CV Button */
+        .cv-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+        }
+
+        /* Personal Info Section */
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-item .label {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-item .value {
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+
+        .skills {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .skill-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            background: var(--hover-color);
+        }
+
+        .skill-item img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .skill-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .projects-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .projects-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 2rem;
+        }
+
+        .project-card {
+            min-width: calc(33.333% - 1.35rem);
+            flex: 0 0 auto;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .prev-btn,
+        .next-btn {
+            background: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .prev-btn:hover,
+        .next-btn:hover {
+            background: var(--hover-color);
+        }
+
+        @media (max-width: 992px) {
+            .project-card {
+                min-width: calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-card {
+                min-width: 100%;
+            }
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background-color: #222;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .project-tag {
+            background: var(--hover-color);
+            color: var(--accent-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-links a {
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .experience-item {
+            margin-bottom: 3rem;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--secondary-color);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+
+        .experience-title {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .experience-company {
+            color: var(--accent-color);
+        }
+
+        .experience-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* New Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease, background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: var(--hover-color);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            color: var(--secondary-color);
+        }
+
+        .contact-value a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            background-color: var(--bg-color);
+            transition: background-color 0.3s;
+        }
+
+        /*Hobbies*/
+        .hobbies-section {
+            margin-top: 2rem;
+        }
+
+        .hobbies-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .hobby-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            transition: transform 0.3s ease, background-color 0.3s;
+            width: 100px;
+            text-align: center;
+        }
+
+        .hobby-item:hover {
+            transform: translateY(-5px);
+            background: var(--hover-color);
+        }
+
+        .hobby-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .toggles {
+                display: none;
+            }
+
+            .header-right {
+                display: flex;
+                align-items: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--header-bg);
+                backdrop-filter: blur(10px);
+                padding: 2rem 0;
+                transition: left 0.3s ease;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 1rem 0;
+                text-align: center;
+            }
+
+            .toggle-container {
+                display: flex;
+                justify-content: center;
+                gap: 1.5rem;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .about-image img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .personal-info {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        #timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-block {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-content {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 80px;
+        }
+
+        .timeline-img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            background: #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sprite {
+            width: 30px;
+            height: 30px;
+            background-size: cover;
+        }
+
+        .sprite.university {
+            background-image: url('university-icon.png');
+        }
+
+        .sprite.industry {
+            background-image: url('industry-icon.png');
+        }
+
+        .sprite.research {
+            background-image: url('research-icon.png');
+        }
+
+        /* ... Tu peux créer d'autres icônes ou utiliser FontAwesome à la place */
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Guér<span>inda</span></div>
+        <div class="header-left">
+            <div class="toggles">
+                <div class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="lang-toggle" id="lang-toggle">
+                    <span>FR</span>
+                </div>
+                <a href="#" class="btn cv-btn" id="download-cv">
+                    <i class="fas fa-download"></i> CV
+                </a>
+            </div>
+            <div class="hamburger">☰</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" data-fr="Accueil" data-en="Home">Accueil</a></li>
+                <li><a href="#about" data-fr="À propos" data-en="About">À propos</a></li>
+                <li><a href="#stats" data-fr="Statistiques" data-en="Statistics">Statistiques</a></li>
+                <li><a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a></li>
+                <li><a href="#projects" data-fr="Projets" data-en="Projects">Projets</a></li>
+                <li><a href="#experience" data-fr="Expérience" data-en="Experience">Expérience</a></li>
+                <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+                <li class="toggle-container mobile-only">
+                    <div class="theme-toggle" id="theme-toggle-mobile">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="lang-toggle" id="lang-toggle-mobile">
+                        <span>FR</span>
+                    </div>
+                    <a href="#" class="btn cv-btn" id="download-cv-mobile">
+                        <i class="fas fa-download"></i> CV
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <p class="accent" data-fr="Bonjour, je m'appelle" data-en="Hello, my name is">Bonjour, je m'appelle</p>
+                <h1>Guérinda</h1>
+                <h1 style="color: var(--secondary-color);" data-fr="Développeuse Fullstack"
+                    data-en="Fullstack Developer">Développeuse Fullstack</h1>
+                <p data-fr="Je suis spécialisée en analyse informatique et programmation. Je développe des solutions web et mobile complètes, du frontend au backend, en passant par la gestion de bases de données et l'architecture système."
+                    data-en="I specialize in computer analysis and programming. I develop complete web and mobile solutions, from frontend to backend, including database management and system architecture.">
+                    Je suis spécialisée en analyse informatique et programmation. Je développe des solutions web et
+                    mobile complètes, du frontend au backend, en passant par la gestion de bases de données et
+                    l'architecture système.
+                </p>
+                <a href="#projects" class="btn" data-fr="Voir mes projets" data-en="View my projects">Voir mes
+                    projets</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title" data-fr="À propos de moi" data-en="About me">À propos de moi</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p data-fr="Étudiante passionnée en Informatique de gestion avec une spécialisation en analyse informatique et programmation. Mon parcours m'a permis de développer une solide expertise en développement fullstack, combinant à la fois les aspects frontend et backend."
+                            data-en="Passionate student in Business Computing with a specialization in computer analysis and programming. My journey has allowed me to develop solid expertise in fullstack development, combining both frontend and backend aspects.">
+                            Étudiante passionnée en Informatique de gestion avec une spécialisation en analyse
+                            informatique et programmation. Mon parcours m'a permis de développer une solide expertise en
+                            développement fullstack, combinant à la fois les aspects frontend et backend.
+                        </p>
+                        <p data-fr="Ma formation m'a donné une approche analytique des problématiques informatiques, me permettant de concevoir des architectures robustes et des solutions adaptées aux besoins des utilisateurs."
+                            data-en="My education has given me an analytical approach to IT issues, allowing me to design robust architectures and solutions tailored to user needs.">
+                            Ma formation m'a donné une approche analytique des problématiques informatiques, me
+                            permettant de concevoir des architectures robustes et des solutions adaptées aux besoins des
+                            utilisateurs.
+                        </p>
+                        <p data-fr="En dehors du code, j'ai plusieurs centres d'intérets et je suis toujours à la recherche de nouveaux défis techniques à relever."
+                            data-en="Outside of coding, I have several interests and I am always looking for new technical challenges to tackle.">
+                            En dehors du code, j'ai plusieurs centres d'intérets et je suis toujours à la recherche de
+                            nouveaux défis techniques à relever.
+                        </p>
+
+                        <!-- Personal Info Section -->
+                        <div class="personal-info">
+                            <div class="info-item">
+                                <span class="label" data-fr="Âge" data-en="Age">Âge</span>
+                                <span class="value">26 ans</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label" data-fr="Nationalité" data-en="Nationality">Nationalité</span>
+                                <span class="value">Congolaise</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label" data-fr="Disponibilité" data-en="Availability">Disponibilité</span>
+                                <span class="value" data-fr="Disponible" data-en="Available">Disponible</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label" data-fr="Langues" data-en="Languages">Langues</span>
+                                <span class="value" data-fr="Français, Anglais" data-en="French, English">Français,
+                                    Anglais</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label" data-fr="Adresse" data-en="Address">Adresse</span>
+                                <span class="value">Kinshasa, RDC</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label" data-fr="Téléphone" data-en="Phone">Téléphone</span>
+                                <span class="value">+243 123 456 789</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Email</span>
+                                <span class="value">guerinda@example.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">GitHub</span>
+                                <span class="value">github.com/guerinda</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="Images/WhatsApp Image 2025-03-31 à 13.09.24_3a7815c9.jpg" alt="Photo de profil">
+                    </div>
+                </div>
+
+                <div class="hobbies-section">
+                    <h3 data-fr="Mes centres d'intérêt" data-en="My interests">Mes centres d'intérêt</h3>
+                    <div class="hobbies-container">
+                        <div class="hobby-item">
+                            <i class="hobby-icon">🏋️‍♀️</i>
+                            <span data-fr="Fitness" data-en="Fitness">Fitness</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="hobby-icon">📚</i>
+                            <span data-fr="Lecture" data-en="Reading">Lecture</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="hobby-icon">🎮</i>
+                            <span data-fr="Jeux vidéo" data-en="Video games">Jeux vidéo</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="hobby-icon">✈️</i>
+                            <span data-fr="Voyages" data-en="Travel">Voyages</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="hobby-icon">🧶</i>
+                            <span data-fr="Tricotage" data-en="Knitting">Tricotage</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="hobby-icon">💃</i>
+                            <span data-fr="Danse" data-en="Dancing">Danse</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="hobby-icon">✍️</i>
+                            <span data-fr="Écriture" data-en="Writing">Écriture</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="hobby-icon">🚲</i>
+                            <span data-fr="Cyclisme" data-en="Cycling">Cyclisme</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nouvelle section statistiques -->
+        <section id="stats" class="stats-section">
+            <div class="container">
+                <h2 class="section-title" data-fr="Statistiques" data-en="Statistics">Statistiques</h2>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="experience-years">3+</div>
+                        <div class="stat-label" data-fr="Années d'expérience" data-en="Years of experience">Années
+                            d'expérience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="projects-count">15+</div>
+                        <div class="stat-label" data-fr="Projets réalisés" data-en="Completed projects">Projets réalisés
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="languages-count">12+</div>
+                        <div class="stat-label" data-fr="Langages maîtrisés" data-en="Programming languages">Langages
+                            maîtrisés</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title" data-fr="Compétences" data-en="Skills">Compétences</h2>
+                <div class="skills">
+                    <div class="skill-row">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                alt="HTML5">
+                            <span>HTML5</span>
+                        </div>
+
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg"
+                                alt="Tailwind CSS">
+                            <span>Tailwind CSS</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                alt="JavaScript">
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                                alt="PHP">
+                            <span>PHP</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"
+                                alt="Dart">
+                            <span>Dart</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                alt="Python">
+                            <span>Python</span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                alt="CSS3">
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg"
+                                alt="Bootstrap">
+                            <span>Bootstrap</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                                alt="React">
+                            <span>ReactJS</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg"
+                                alt="Laravel">
+                            <span>Laravel</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
+                                alt="Flutter">
+                            <span>Flutter</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                                alt="Java">
+                            <span>Java</span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
+                                alt="Firebase">
+                            <span>Firebase</span>
+                        </div>
+
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                alt="MySQL">
+                            <span>MySQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="Oracle">
+                            <span>Oracle</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/UML_logo.svg/2048px-UML_logo.svg.png"
+                                alt="UML">
+                            <span>UML</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                                alt="Git">
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+                                alt="Linux">
+                            <span>Linux</span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg"
+                                alt="Windows">
+                            <span>Windows</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title" data-fr="Mes projets" data-en="My Portfolio">Mes projets</h2>
+                <div class="projects-container">
+                    <div class="projects-slider">
+                        <div class="project-card">
+                            <div class="project-image"></div>
+                            <div class="project-info">
+                                <h3 class="project-title">Nom du Projet 2</h3>
+                                <p>Description détaillée du projet, technologies utilisées, défis rencontrés et
+                                    solutions
+                                    apportées.</p>
+                                <div class="project-tags">
+                                    <span class="project-tag">Vue.js</span>
+                                    <span class="project-tag">Express</span>
+                                    <span class="project-tag">PostgreSQL</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Demo</a>
+                                    <a href="#" target="_blank">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card">
+                                <div class="project-image"></div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Nom du Projet 2</h3>
+                                    <p>Description détaillée du projet, technologies utilisées, défis rencontrés et
+                                        solutions
+                                        apportées.</p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Vue.js</span>
+                                        <span class="project-tag">Express</span>
+                                        <span class="project-tag">PostgreSQL</span>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="#" target="_blank">Demo</a>
+                                        <a href="#" target="_blank">GitHub</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card">
+                                <div class="project-image"></div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Nom du Projet 2</h3>
+                                    <p>Description détaillée du projet, technologies utilisées, défis rencontrés et
+                                        solutions
+                                        apportées.</p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Vue.js</span>
+                                        <span class="project-tag">Express</span>
+                                        <span class="project-tag">PostgreSQL</span>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="#" target="_blank">Demo</a>
+                                        <a href="#" target="_blank">GitHub</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Plus de projets ici -->
+                    </div>
+                    <div class="slider-controls">
+                        <button class="prev-btn">❮</button>
+                        <button class="next-btn">❯</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+
+                <h2 class="section-title">Expérience</h2>
+                <div class="experience-timeline">
+                    <div class="experience-item">
+                        <h3 class="experience-title">Développeuse Fullstack <span class="experience-company">@ Nom de
+                                l'entreprise</span></h3>
+                        <p class="experience-date">Janvier 2024 - Présent</p>
+                        <p>Description détaillée de vos responsabilités, projets réalisés et compétences acquises dans
+                    </div>
+                    <div class="experience-item">
+                        <h3 class="experience-title">Stage en développement web <span class="experience-company">@ Nom
+                                de l'entreprise</span></h3>
+                        <p class="experience-date">Juin 2023 - Décembre 2023</p>
+                        <p>Description détaillée de vos responsabilités, projets réalisés et compétences acquises durant
+                            ce stage.</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3 class="experience-title">Projet académique <span class="experience-company">@ Votre
+                                école</span></h3>
+                        <p class="experience-date">Septembre 2022 - Mai 2023</p>
+                        <p>Description détaillée du projet académique, technologies utilisées, rôle dans l'équipe et
+                            résultats obtenus.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
