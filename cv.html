@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guérinda GOHOUE - CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .cv-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            min-height: 297mm;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px;
+            position: relative;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,255,255,0.1);
+            pointer-events: none;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00d4ff, #5b86e5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            border: 4px solid rgba(255,255,255,0.2);
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+
+        .title {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            background: #00d4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #00d4ff;
+            border-bottom: 2px solid #00d4ff;
+            padding-bottom: 10px;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #5b86e5);
+            border-radius: 3px;
+        }
+
+        .language-item, .hobby-item {
+            margin-bottom: 10px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 40px;
+            background: white;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .summary {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .content-section-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 25px;
+            border-left: 4px solid #00d4ff;
+            padding-left: 20px;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .experience-item::before, .education-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #00d4ff;
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 5px;
+        }
+
+        .item-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .item-company {
+            font-size: 16px;
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+
+        .item-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .skill-category-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .skill-list {
+            font-size: 14px;
+            color: #555;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: none;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="profile-photo">GG</div>
+                <div class="name">Guérinda GOHOUE</div>
+                <div class="title">Fullstack Developer</div>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <span>guerindagohoue@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <span>+229 0190388922</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <span>Abomey-Calavi, Benin</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🎂</div>
+                    <span>February 25, 2005</span>
+                </div>
+            </div>
+
+            <div class="section-title">Technical Skills</div>
+            <div class="skill-item">
+                <div class="skill-name">Web Development</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Mobile Development</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Database Management</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Network Security</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 75%"></div>
+                </div>
+            </div>
+
+            <div class="section-title">Languages</div>
+            <div class="language-item">🇫🇷 French - Native</div>
+            <div class="language-item">🇬🇧 English - Intermediate</div>
+
+            <div class="section-title">Hobbies</div>
+            <div class="hobby-item">💻 Coding</div>
+            <div class="hobby-item">📚 Reading</div>
+            <div class="hobby-item">🧶 Knitting</div>
+            <div class="hobby-item">🚴‍♀️ Cycling</div>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <div class="main-title">CURRICULUM VITAE</div>
+                <div class="subtitle">Information Technology Student & Developer</div>
+            </div>
+
+            <div class="summary">
+                I am Guérinda GOHOUE, a 3rd-year Information Management student at ENEAM, specializing in Computer Analysis and Programming. Passionate about web and mobile technologies, I master languages and frameworks such as Laravel, PHP, Flutter, Firebase, as well as web design with Bootstrap. I also have skills in UML modeling, database management and administration.
+
+                During my studies, I had the opportunity to work on several concrete projects in web and mobile development, thus strengthening my technical skills and my ability to work in a team. Rigorous, methodical and organized, I strive to meet deadlines and produce quality work.
+            </div>
+
+            <div class="content-section">
+                <div class="content-section-title">Professional Experience</div>
+                
+                <div class="experience-item">
+                    <div class="item-title">Treasurer General</div>
+                    <div class="item-company">Association of Computer Science Students Synergie (AEI Synergie)</div>
+                    <div class="item-date">February 2024 - February 2025 (1 year, 1 month)</div>
+                    <div class="item-description">
+                        Managing financial operations and budget planning for the computer science student association at ENEAM Cotonou.
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="item-title">Network and System Security Intern</div>
+                    <div class="item-company">TBC GROUP</div>
+                    <div class="item-date">August - September 2024 (2 months)</div>
+                    <div class="item-description">
+                        Gained hands-on experience in network security protocols, system administration, and cybersecurity best practices.
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="item-title">Web Development Intern</div>
+                    <div class="item-company">FUN HIGH TECH</div>
+                    <div class="item-date">April - June 2024 (3 months)</div>
+                    <div class="item-description">
+                        Developed web applications using modern frameworks and technologies, collaborating with senior developers on client projects.
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="content-section-title">Education & Training</div>
+                
+                <div class="education-item">
+                    <div class="item-title">Information Management</div>
+                    <div class="item-company">National School of Applied Economics and Management (ENEAM)</div>
+                    <div class="item-date">November 2022 - Present</div>
+                    <div class="item-description">
+                        Currently in 3rd year, specializing in Computer Analysis and Programming.
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="item-title">Web Development Training</div>
+                    <div class="item-company">FUN HIGH TECH</div>
+                    <div class="item-date">June - August 2023</div>
+                    <div class="item-description">
+                        Intensive training in modern web development technologies and best practices.
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="item-title">Scientific Baccalaureate, Series D</div>
+                    <div class="item-company">CC Pierre Joseph de Clorivière</div>
+                    <div class="item-date">September 2021 - July 2022</div>
+                    <div class="item-description">
+                        High school diploma with focus on scientific subjects.
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="item-title">Computer Science Fundamentals</div>
+                    <div class="item-company">Technology Business Center Group (TBC)</div>
+                    <div class="item-date">July 2016 - August 2017</div>
+                    <div class="item-description">
+                        Foundation course in computer science principles and applications.
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="content-section-title">Technical Expertise</div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-category-title">Backend Development</div>
+                        <div class="skill-list">Laravel • MySQL • REST APIs</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Frontend Development</div>
+                        <div class="skill-list">Bootstrap • Blade • React</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Mobile Development</div>
+                        <div class="skill-list">Flutter • Firebase</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Programming Languages</div>
+                        <div class="skill-list">PHP • Python • Java • JavaScript</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Tools & Methodologies</div>
+                        <div class="skill-list">Git • LaTeX • Visual Paradigm • StarUML</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Office Suite</div>
+                        <div class="skill-list">Microsoft Word • Excel • PowerPoint</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Print functionality
+        function printCV() {
+            window.print();
+        }
+
+        // Add print button functionality
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                printCV();
+            }
+        });
+    </script>
+</body>
+</html>

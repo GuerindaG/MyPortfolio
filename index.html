@@ -4,28 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Développeuse Fullstack</title>
+    <title>Guérinda GOHOUE - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             /* Dark theme (default) */
-            --bg-color: #0f0f0f;
-            --text-color: #f5f5f5;
-            --accent-color: #64ffda;
-            --secondary-color: #8892b0;
-            --hover-color: rgba(100, 255, 218, 0.1);
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --header-bg: rgba(15, 15, 15, 0.9);
+            --bg-color: #0a0a0a;
+            --text-color: #f8fafc;
+            --accent-color: #00d9ff;
+            --secondary-color: #64748b;
+            --hover-color: rgba(0, 217, 255, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --header-bg: rgba(10, 10, 10, 0.95);
+            --gradient-primary: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+            --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            --shadow-primary: 0 10px 30px rgba(0, 217, 255, 0.2);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         [data-theme="light"] {
-            --bg-color: #f5f5f5;
-            --text-color: #0f0f0f;
-            --accent-color: #0a9b78;
-            --secondary-color: #6b7280;
-            --hover-color: rgba(10, 155, 120, 0.1);
-            --card-bg: rgba(0, 0, 0, 0.03);
-            --header-bg: rgba(245, 245, 245, 0.9);
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --accent-color: #0ea5e9;
+            --secondary-color: #64748b;
+            --hover-color: rgba(14, 165, 233, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --header-bg: rgba(248, 250, 252, 0.95);
+            --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            --shadow-primary: 0 10px 30px rgba(14, 165, 233, 0.2);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -36,113 +45,88 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.7;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
         }
 
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header amélioré */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
+            padding: 1.5rem 5%;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 100;
-            background-color: rgba(15, 15, 15, 0.9);
-            backdrop-filter: blur(10px);
-            transition: background-color 0.3s;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .logo span {
-            color: var(--accent-color);
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
+            gap: 2rem;
         }
 
         nav ul li a {
             color: var(--text-color);
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
         nav ul li a:hover {
             color: var(--accent-color);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 8rem 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero {
-            padding-top: 10rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-
-        .accent {
-            color: var(--accent-color);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: transparent;
-            color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            margin-top: 2rem;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--hover-color);
-            transform: translateY(-3px);
-        }
-
-        /* Theme & Language toggles */
+        /* Toggles améliorés */
         .toggles {
             display: flex;
             gap: 1rem;
             align-items: center;
-            margin-right: 2rem;
         }
 
         .theme-toggle,
@@ -150,403 +134,848 @@
             cursor: pointer;
             font-size: 1.2rem;
             color: var(--secondary-color);
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: var(--card-bg);
         }
 
         .theme-toggle:hover,
         .lang-toggle:hover {
             color: var(--accent-color);
+            transform: scale(1.1);
         }
 
-        /* CV Button */
-        .cv-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-left: 1rem;
+        /* Container centré */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .about-content {
+        /* Sections avec meilleur espacement et centrage */
+        section {
+            padding: 6rem 0;
+            min-height: 90vh;
             display: flex;
             align-items: center;
-            gap: 4rem;
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        .about-image {
-            flex: 1;
+            justify-content: center;
             text-align: center;
         }
 
-        .about-image img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent-color);
+        /* Hero section améliorée */
+        .hero {
+            background: radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+            min-height: 100vh;
         }
 
-        /* Personal Info Section */
-        .personal-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--secondary-color);
-        }
-
-        .info-item {
+        .hero-content {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
         }
 
-        .info-item .label {
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             color: var(--secondary-color);
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
-        .info-item .value {
-            font-weight: 500;
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s both;
         }
 
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-btn {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-primary);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .secondary-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Section titles améliorés */
         .section-title {
-            font-size: 2rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 3rem;
             position: relative;
             display: inline-block;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50%;
-            height: 3px;
-            background-color: var(--accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
         }
 
-        /* Stats Section */
-        .stats-section {
-            padding: 4rem 0;
+        /* About section améliorée */
+        #about .container {
+            text-align: left;
         }
 
-        .stats-container {
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .about-image-gradient {
+            width: 300px;
+            height: 400px;
+            padding: 3px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .about-image-gradient .image-container {
+            width: 100%;
+            height: 100%;
+            border-radius: 17px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .about-image-gradient img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Personal info améliorée */
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 2px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .info-item {
+            background: var(--gradient-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .info-item .label {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item .value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Formation section (nouvelle) */
+        .education-container {
+            max-width: 700px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+        }
+
+        .education-card {
+            background: var(--gradient-card);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .education-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .education-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .education-title {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .education-school {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .education-date {
+            color: var(--secondary-color);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            background: rgba(0, 217, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+        }
+
+        .education-description {
+            color: var(--secondary-color);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .education-skills {
+            display: flex;
             flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .education-card {
+                padding: 2rem;
+            }
+
+            .education-title {
+                font-size: 1.6rem;
+            }
+
+            .education-description {
+                text-align: left;
+            }
+
+            .education-skills {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Expérience section améliorée */
+        .experience-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            background: var(--gradient-card);
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--accent-color);
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .experience-title {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .experience-company {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .experience-date {
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+            margin: 0.5rem 0 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .experience-description {
+            color: var(--secondary-color);
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* Skills section améliorée */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
         }
 
-        .stat-item {
-            text-align: center;
-            flex: 1;
-            min-width: 150px;
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .stat-value {
-            font-size: 3rem;
-            font-weight: 700;
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--accent-color);
-            margin-bottom: 0.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.5rem;
         }
 
-        .stat-label {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-        }
-
-        .skills {
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
+        .skill-category h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
         }
 
         .skill-row {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            justify-items: center;
         }
 
         .skill-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 8px;
+            background: var(--gradient-card);
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 140px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .skill-item:hover {
-            transform: translateY(-5px);
-            background: rgba(100, 255, 218, 0.05);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: var(--shadow-primary);
+            background: rgba(var(--accent-color-rgb), 0.1);
         }
 
-        .skill-item img {
+        .skill-item img,
+        .skill-item i {
             width: 50px;
             height: 50px;
             margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+            object-fit: contain;
         }
 
+        .skill-item:hover img,
+        .skill-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .skill-item span {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .skill-row {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 1rem;
+            }
+
+            .skill-item {
+                padding: 1rem 0.5rem;
+                max-width: 100px;
+            }
+
+            .skill-item img,
+            .skill-item i {
+                width: 40px;
+                height: 40px;
             }
         }
 
-        .projects-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
+        /* Hobbies améliorés */
+        .hobbies-section {
+            margin-top: 4rem;
+            text-align: center;
         }
 
-        .projects-slider {
-            display: flex;
-            transition: transform 0.5s ease;
-            gap: 2rem;
-        }
-
-        .project-card {
-            min-width: calc(33.333% - 1.35rem);
-            flex: 0 0 auto;
-        }
-
-        .slider-controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
-            gap: 1rem;
-        }
-
-        .prev-btn,
-        .next-btn {
-            background: transparent;
+        .section-subtitle {
+            font-size: 2rem;
+            margin-bottom: 2rem;
             color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            border-radius: 50%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 40px;
-            height: 40px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        .hobby-item {
+            background: var(--gradient-card);
+            padding: 2rem 1.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 180px;
+        }
+
+        .hobby-item:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .hobby-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.8rem;
             transition: all 0.3s ease;
         }
 
-        .prev-btn:hover,
-        .next-btn:hover {
-            background: var(--hover-color);
+        .hobby-item:hover .hobby-icon {
+            transform: scale(1.2);
         }
 
-        @media (max-width: 992px) {
-            .project-card {
-                min-width: calc(50% - 1rem);
-            }
+        /* Projects section améliorée */
+        .projects-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 2rem 0;
+            scroll-behavior: smooth;
         }
 
-        @media (max-width: 768px) {
-            .project-card {
-                min-width: 100%;
-            }
+        .projects-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .projects-slider::-webkit-scrollbar-track {
+            background: var(--card-bg);
+            border-radius: 4px;
+        }
+
+        .projects-slider::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        .project-card {
+            min-width: 380px;
+            background: var(--gradient-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .project-image-container {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
         }
 
         .project-image {
             width: 100%;
-            height: 200px;
-            background-color: #222;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
         }
 
         .project-info {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .project-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .project-info p {
+            color: var(--secondary-color);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: justify;
         }
 
         .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin: 1rem 0;
+            margin-bottom: 2rem;
         }
 
         .project-tag {
-            background: var(--hover-color);
+            background: rgba(0, 217, 255, 0.1);
             color: var(--accent-color);
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 217, 255, 0.3);
         }
 
         .project-links {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
         }
 
         .project-links a {
-            color: var(--secondary-color);
-            transition: color 0.3s ease;
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-links a:first-child {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .project-links a:last-child {
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
         }
 
         .project-links a:hover {
-            color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
-        .experience-item {
-            margin-bottom: 3rem;
-            position: relative;
-            padding-left: 2rem;
-            border-left: 4px solid var(--secondary-color);
-        }
-
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-        }
-
-        .experience-title {
-            font-size: 1.2rem;
-            color: var(--text-color);
-        }
-
-        .experience-company {
-            color: var(--accent-color);
-        }
-
-        .experience-date {
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        /* New Contact Section */
+        /* Contact section améliorée */
         .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 4rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
             margin-bottom: 3rem;
         }
 
         .contact-card {
-            background: var(--card-bg);
-            padding: 4rem;
-            border-radius: 8px;
-            transition: transform 0.3s ease, background-color 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: var(--gradient-card);
+            padding: 3rem 2rem;
+            border-radius: 20px;
             text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-card);
+            flex: 1;
+            min-width: 300px;
+            max-width: calc(50% - 1rem);
+            /* 50% moins la moitié du gap */
         }
 
         .contact-card:hover {
-            transform: translateY(-5px);
-            background: var(--hover-color);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-primary);
         }
 
         .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
             font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
+            color: white;
         }
 
         .contact-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-value {
-            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
         }
 
         .contact-value a {
             color: var(--secondary-color);
             text-decoration: none;
             transition: color 0.3s ease;
+            font-weight: 500;
         }
 
         .contact-value a:hover {
             color: var(--accent-color);
         }
 
-        .social-links {
+        .contact-socials {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin: 2rem 0;
+            margin-top: 2rem;
         }
 
-        .social-links a {
-            color: var(--secondary-color);
-            font-size: 1.5rem;
-            transition: color 0.3s ease, transform 0.3s ease;
-            width: 50px;
-            height: 50px;
-            background: var(--card-bg);
-            border-radius: 50%;
+        .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-card);
+            color: white;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-card);
         }
 
-        .social-links a:hover {
-            color: var(--accent-color);
-            transform: translateY(-5px);
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-primary);
         }
 
+        /* Couleurs spécifiques pour chaque réseau */
+        .social-link:nth-child(1):hover {
+            /* GitHub */
+            background: #333;
+            color: white;
+        }
+
+        .social-link:nth-child(2):hover {
+            /* LinkedIn */
+            background: #0077b5;
+            color: white;
+        }
+
+        .social-link:nth-child(3):hover {
+            /* Facebook */
+            background: #4267B2;
+            color: white;
+        }
+
+        /* Version responsive */
+        @media (max-width: 768px) {
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-card {
+                max-width: 100%;
+            }
+        }
+
+        /* Footer amélioré */
         footer {
+            background: var(--card-bg);
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
             color: var(--secondary-color);
-            font-size: 0.9rem;
-            background-color: var(--bg-color);
-            transition: background-color 0.3s;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
 
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive amélioré */
+        @media (max-width: 1024px) {
             .about-content {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .about-image img {
-                width: 200px;
-                height: 200px;
-            }
-
-            .projects-grid {
                 grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
             }
-        }
 
-        /* Mobile menu */
-        .hamburger {
-            display: none;
-            cursor: pointer;
+            .education-timeline::before {
+                left: 20px;
+            }
+
+            .education-item {
+                width: calc(100% - 60px);
+                left: 40px !important;
+                text-align: left;
+            }
+
+            .education-item::before {
+                left: -35px !important;
+            }
         }
 
         @media (max-width: 768px) {
+            header {
+                padding: 1rem 3%;
+            }
+
             .hamburger {
                 display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
             }
 
             nav ul {
@@ -554,10 +983,11 @@
                 top: 80px;
                 left: -100%;
                 width: 100%;
+                height: calc(100vh - 80px);
                 flex-direction: column;
-                background-color: rgba(15, 15, 15, 0.95);
-                backdrop-filter: blur(10px);
-                padding: 2rem 0;
+                justify-content: center;
+                background: var(--header-bg);
+                backdrop-filter: blur(20px);
                 transition: left 0.3s ease;
             }
 
@@ -567,165 +997,67 @@
 
             nav ul li {
                 margin: 1rem 0;
-                text-align: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .skill-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hobbies-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-slider {
+                flex-direction: column;
+            }
+
+            .project-card {
+                min-width: 100%;
             }
         }
 
-        /*Hobbies*/
-        .hobbies-section {
-            margin-top: 2rem;
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .personal-info {
+                grid-template-columns: 1fr;
+            }
+
+            .skill-row,
+            .hobbies-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
         }
 
-        .hobbies-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .hobby-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-            width: 100px;
-            text-align: center;
-        }
-
-        .hobby-item:hover {
-            transform: translateY(-5px);
-            background: var(--hover-color);
-        }
-
-        .hobby-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        #timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .timeline-block {
-            position: relative;
-            margin-bottom: 40px;
-        }
-
-        .timeline-content {
-            background: #fff;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-left: 80px;
-        }
-
-        .timeline-img {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 50px;
-            height: 50px;
-            background: #eee;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .sprite {
-            width: 30px;
-            height: 30px;
-            background-size: cover;
-        }
-
-        .sprite.university {
-            background-image: url('university-icon.png');
-        }
-
-        .sprite.industry {
-            background-image: url('industry-icon.png');
-        }
-
-        .sprite.research {
-            background-image: url('research-icon.png');
-        }
-
-        /* CSS pour la section éducation */
-        .education-section {
-            margin-top: 2rem;
-        }
-
-        .timeline {
-            position: relative;
-            margin-top: 1.5rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background-color: var(--secondary-color);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 10px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-        }
-
-        .timeline-date {
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .contact-socials {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .contact-socials a {
-            color: var(--secondary-color);
-            font-size: 1.25rem;
-            transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .contact-socials a:hover {
-            color: var(--accent-color);
-            transform: translateY(-3px);
-            background: var(--hover-color);
+        /* Mobile menu */
+        .hamburger {
+            display: none;
         }
     </style>
 </head>
@@ -749,11 +1081,10 @@
         <nav>
             <ul>
                 <li><a href="#home">Accueil</a></li>
-                <li><a href="#about">À propos</a></li>
+                <li><a href="#formation">Mon parcours</a></li>
                 <li><a href="#skills">Compétences</a></li>
-                <li><a href="#projects">Projets</a></li>
-                <li><a href="#experience">Expérience</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#projects">Mes projets</a></li>
+                <li><a href="#contact">Contacts</a></li>
             </ul>
         </nav>
     </header>
@@ -761,54 +1092,60 @@
     <main>
         <section id="home" class="hero">
             <div class="container">
-                <p class="accent" data-fr="Bonjour, je m'appelle" data-en="Hello, my name is">Bonjour, je m'appelle</p>
-                <h1>Guérinda</h1>
-                <h1 style="color: var(--secondary-color);">Développeuse Fullstack</h1>
-                <p data-fr="Je suis spécialisée en analyse informatique et programmation. Je développe des solutions web et mobile complètes, du frontend au backend, en passant par la gestion de bases de données et l'architecture système."
-                    data-en="I specialize in computer analysis and programming. I develop complete web and mobile solutions, from frontend to backend, including database management and system architecture.">
-                    Je suis spécialisée en analyse informatique et programmation. Je développe des solutions web et
-                    mobile complètes, du frontend au backend, en passant par la gestion de bases de données et
-                    l'architecture système.
-                </p>
-                <a href="#projects" class="btn" data-fr="Voir mes projets" data-en="View my projects">Voir mes
-                    projets</a>
-                <a href="#" class="btn cv-btn" id="download-cv-mobile">
-                    <i class="fas fa-download"></i> CV
-                </a>
+                <div class="hero-content">
+                    <h1>
+                        <span class="typed-text">Bienvenue sur mon portfolio</span>
+                        <span class="cursor"></span>
+                    </h1>
+                    <p>
+                        Je suis Guérinda GOHOUE, développeuse fullstack passionnée. Je développe des solutions web et
+                        mobile complètes, du frontend au backend, en passant par la gestion de bases de données et
+                        l'architecture système.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn primary-btn">
+                            <i class="fas fa-code"></i> Voir mes projets
+                        </a>
+                        <a href="#" class="btn secondary-btn" id="download-cv">
+                            <i class="fas fa-download"></i> Télécharger CV
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="about">
             <div class="container">
-                <h2 class="section-title" data-fr="À propos de moi" data-en="About me">À propos de moi</h2>
+                <h2 class="section-title">À propos de moi</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p data-fr="Étudiante passionnée en Informatique de gestion avec une spécialisation en analyse informatique et programmation. Mon parcours m'a permis de développer une solide expertise en développement fullstack, combinant à la fois les aspects frontend et backend."
-                            data-en="Passionate student in Business Computing with a specialization in computer analysis and programming. My journey has allowed me to develop solid expertise in fullstack development, combining both frontend and backend aspects.">
+                        <p>
                             Étudiante passionnée en Informatique de gestion avec une spécialisation en analyse
                             informatique et programmation. Mon parcours m'a permis de développer une solide expertise en
                             développement fullstack, combinant à la fois les aspects frontend et backend.
                         </p>
-                        <p data-fr="Ma formation m'a donné une approche analytique des problématiques informatiques, me permettant de concevoir des architectures robustes et des solutions adaptées aux besoins des utilisateurs."
-                            data-en="My education has given me an analytical approach to IT issues, allowing me to design robust architectures and solutions tailored to user needs.">
+                        <p>
                             Ma formation m'a donné une approche analytique des problématiques informatiques, me
                             permettant de concevoir des architectures robustes et des solutions adaptées aux besoins des
                             utilisateurs.
                         </p>
-                        <p data-fr="En dehors du code, j'ai plusieurs centres d'intérets et je suis toujours à la recherche de nouveaux défis techniques à relever."
-                            data-en="Outside of coding, I have several interests and I am always looking for new technical challenges to tackle.">
-                            En dehors du code, j'ai plusieurs centres d'intérets et je suis toujours à la recherche de
-                            nouveaux défis techniques à relever.
+                        <p>
+                            En dehors du code, j'ai plusieurs centres d'intérêts et je suis toujours à la recherche de
+                            nouveaux défis techniques à relever. Mon objectif est de contribuer à des projets innovants
+                            qui ont un impact positif sur la société.
                         </p>
                     </div>
-                    <div class="about-image">
-                        <img src="Images/WhatsApp Image 2025-03-31 à 13.09.24_3a7815c9.jpg" alt="Photo de profil">
+                    <div class="about-image-gradient">
+                        <div class="image-container">
+                            <img src="./Images/WhatsApp Image 2025-03-31 à 13.09.24_3a7815c9.jpg" alt="Photo de profil">
+                        </div>
                     </div>
                 </div>
+
                 <!-- Personal Info Section -->
                 <div class="personal-info">
                     <div class="info-item">
-                        <span class="label" data-fr="Nom" data-en="Name">Nom</span>
+                        <span class="label" data-fr="Nom" data-en="Name">Nom</span>br
                         <span class="value">GOHOUE</span>
                     </div>
                     <div class="info-item">
@@ -825,16 +1162,8 @@
                     </div>
                     <div class="info-item">
                         <span class="label" data-fr="Langues" data-en="Languages">Langues</span>
-                        <span class="value" data-fr="Fon, Français, Anglais" data-en="Fon, French, English">Fon,
+                        <span class="value" data-fr="Fon, Français, Anglais" data-en="Fon, French, English">Fon, Minan,
                             Français, Anglais</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label" data-fr="Adresse" data-en="Address">Adresse</span>
-                        <span class="value">Abomey-Calavi,Bénin</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label" data-fr="Téléphone" data-en="Phone">Téléphone</span>
-                        <span class="value">+229 0191075712</span>
                     </div>
                     <div class="info-item">
                         <span class="label">Email</span>
@@ -850,194 +1179,335 @@
                     </div>
                 </div>
                 <div class="hobbies-section">
-                    <h3>Mes centres d'intérêt</h3>
+                    <h3 class="section-subtitle">Mes centres d'intérêt</h3>
                     <div class="hobbies-container">
                         <div class="hobby-item">
-                            <i class="hobby-icon">🏋️‍♀️</i>
+                            <div class="hobby-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
                             <span>Fitness</span>
                         </div>
-                        <div class="hobby-item">
-                            <i class="hobby-icon">📚</i>
+                        <!--div class="hobby-item">
+                            <div class="hobby-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
                             <span>Lecture</span>
-                        </div>
+                        </div-->
                         <div class="hobby-item">
-                            <i class="hobby-icon">🎮</i>
-                            <span>Jeux vidéo</span>
-                        </div>
-                        <div class="hobby-item">
-                            <i class="hobby-icon">✈️</i>
-                            <span>Voyages</span>
-                        </div>
-                        <div class="hobby-item">
-                            <i class="hobby-icon">🧶</i>
-                            <span>Tricotage</span>
-                        </div>
-                        <div class="hobby-item">
-                            <i class="hobby-icon">💃</i>
-                            <span>Danse</span>
-                        </div>
-                        <div class="hobby-item">
-                            <i class="hobby-icon">✍️</i>
+                            <div class="hobby-icon">
+                                <i class="fas fa-pencil-alt"></i>
+                            </div>
                             <span>Écriture</span>
                         </div>
                         <div class="hobby-item">
-                            <i class="hobby-icon">🚲</i>
+                            <div class="hobby-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <span>Photographie</span>
+                        </div>
+                        <div class="hobby-item">
+                            <div class="hobby-icon">
+                                <i class="fas fa-hand-scissors"></i>
+                            </div>
+                            <span>Tricotage</span>
+                        </div>
+                        <div class="hobby-item">
+                            <div class="hobby-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <span>Musique</span>
+                        </div>
+                        <div class="hobby-item">
+                            <div class="hobby-icon">
+                                <i class="fas fa-bicycle"></i>
+                            </div>
                             <span>Cyclisme</span>
                         </div>
                     </div>
                 </div>
-                <!-- Ajouter cette section après les centres d'intérêt >
-                <div class="education-section">
-                    <h3>Formation</h3>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-date">2022 - Présent</div>
-                            <div class="timeline-content">
-                                <h4>Licence en Analyse Informatique et Programmation</h4>
-                                <p>UAC-ENEAM, Bénin</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-date">2021 - 2022</div>
-                            <div class="timeline-content">
-                                <h4>Baccalauréat Scientifique</h4>
-                                <p>Lycée de [Nom], Bénin</p>
-                            </div>
-                        </div>
-                    </div>
-                </div-->
         </section>
 
-        <!-- Ajouter cette section après la section "À propos" >
-        <section class="stats-section">
+        <section id="formation">
             <div class="container">
-                <div class="stats-container">
-                    <div class="stat-item">
-                        <div class="stat-value" data-count="15">0</div>
-                        <div class="stat-label">Projets terminés</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" data-count="3">0</div>
-                        <div class="stat-label">Années d'expérience</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" data-count="8">0</div>
-                        <div class="stat-label">Technologies maîtrisées</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" data-count="10">0</div>
-                        <div class="stat-label">Clients satisfaits</div>
+                <h2 class="section-title">Formation</h2>
+                <div class="education-container">
+                    <div class="education-card">
+                        <div class="education-icon">
+                            🎓
+                        </div>
+                        <div class="education-content">
+                            <h3 class="education-title">Bachelor en Informatique de Gestion</h3>
+                            <div class="education-school">UAC/Ecole Nationale d'Economie Appliquée et de Management
+                            </div>
+                            <div class="education-date">2022 - 2025</div>
+                            <div class="education-description">
+                                Formation complète en informatique de gestion, alliant développement logiciel, bases de
+                                données, réseaux
+                                et compréhension approfondie de l’entreprise. Cette formation polyvalente développe à la
+                                fois des compétences
+                                techniques (programmation, mathématiques appliquées, logique informatique) et des
+                                savoirs en gestion (comptabilité,
+                                analyse financière, économie d’entreprise, entrepreneuriat).
+                                Elle forme des profils capables de concevoir, analyser et agir dans un environnement
+                                professionnel complexe.
+                            </div>
+                            <div class="education-skills">
+                                <span class="skill-tag">Programmation</span>
+                                <span class="skill-tag">Base de données</span>
+                                <span class="skill-tag">Réseaux</span>
+                                <span class="skill-tag">Analyse financière</span>
+                                <span class="skill-tag">Comptabilité</span>
+                                <span class="skill-tag">Mathématiques financières</span>
+                                <span class="skill-tag">Économie d’entreprise</span>
+                                <span class="skill-tag">Entrepreneuriat</span>
+                                <span class="skill-tag">Logique informatique</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section-->
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title" data-fr="Expériences" data-en="Experiences">Expériences
+                </h2>
+                <div class="experience-timeline col-lg-6">
+                    <div class="experience-item">
+                        <h3 class="experience-title" data-fr="Analyse Informatique et Programmation"
+                            data-en="Computer Science and Programming">
+                            Analyse Informatique et Programmation
+                            <span class="experience-company" data-fr="UAC-ENEAM" data-en="UAC-ENEAM">UAC-ENEAM</span>
+                        </h3>
+                        <p class="experience-date" data-fr="Novembre 2022 - Présent" data-en="November 2022 - Present">
+                            Novembre 2022 - Présent
+                        </p>
+                        <p data-fr="Formation approfondie en analyse des systèmes d'information, conception d'applications, programmation web et mobile, gestion de bases de données, et initiation à l'administration réseau."
+                            data-en="Advanced training in information systems analysis, application design, web and mobile programming, database management, and introduction to network administration.">
+                            Formation approfondie en analyse des systèmes d'information, conception d'applications,
+                            programmation web et mobile, gestion de bases de données, et initiation à
+                            l'administration
+                            réseau.
+                        </p>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3 class="experience-title" data-fr="Stage en Développement Web"
+                            data-en="Web Development Internship">
+                            Stage en Développement Web
+                            <span class="experience-company" data-fr="Fun High Tech" data-en="Fun High Tech">Fun
+                                High
+                                Tech</span>
+                        </h3>
+                        <p class="experience-date" data-fr="Juin 2023 - Décembre 2023"
+                            data-en="June 2023 - December 2023">
+                            Juin 2023 - Décembre 2023
+                        </p>
+                        <p data-fr="Développement d'une plateforme de gestion de supermarchés. Compétences acquises en PHP, MySQL, Bootstrap et bases du développement mobile. Participation à la conception de solutions web adaptées aux besoins des utilisateurs."
+                            data-en="Development of a supermarket management platform. Skills acquired in PHP, MySQL, Bootstrap, and basics of mobile development. Participated in designing web solutions tailored to user needs.">
+                            Développement d'une plateforme de gestion de supermarchés. Compétences acquises en PHP,
+                            MySQL, Bootstrap et bases du développement mobile. Participation à la conception de
+                            solutions web adaptées aux besoins des utilisateurs.
+                        </p>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3 class="experience-title" data-fr="Stage en Sécurité Réseau et Système"
+                            data-en="Network and System Security Internship">
+                            Stage en Sécurité Réseau et Système
+                            <span class="experience-company" data-fr="TBC Group" data-en="TBC Group">TBC
+                                Group</span>
+                        </h3>
+                        <p class="experience-date" data-fr="Septembre 2022 - Mai 2023"
+                            data-en="September 2022 - May 2023">
+                            Septembre 2022 - Mai 2023
+                        </p>
+                        <p data-fr="Interventions sur la maintenance informatique, configuration d'équipements réseau (routeurs, switchs), installation de caméras de surveillance, et initiation à la sécurité des systèmes d'information."
+                            data-en="Involved in IT maintenance operations, configuration of network equipment (routers, switches), installation of surveillance cameras, and introduction to information system security.">
+                            Interventions sur la maintenance informatique, configuration d'équipements réseau
+                            (routeurs,
+                            switchs), installation de caméras de surveillance, et initiation à la sécurité des
+                            systèmes
+                            d'information.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="skills">
             <div class="container">
-                <h2 class="section-title" data-fr="Compétences" data-en="Skills">Compétences</h2>
-                <div class="skills">
-                    <div class="skill-row">
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                                alt="HTML5">
-                            <span>HTML5</span>
+                <h2 class="section-title" data-fr="Compétences" data-en="Skills">Mes compétences techniques</h2>
+                <div class="skills-container">
+                    <!-- Front-End -->
+                    <div class="skill-category">
+                        <h3>Front-End</h3>
+                        <div class="skill-row">
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                                    alt="React">
+                                <span>React</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
+                                    alt="Angular">
+                                <span>Angular</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+                                    alt="Vue">
+                                <span>Vue.js</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap.svg"
+                                    alt="Bootstrap">
+                                <span>Bootstrap</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/taiwanldCss/taiwanldCss-original.svg"
+                                    alt="TaiwanldCss">
+                                <span>TaiwanldCss</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript.svg"
+                                    alt="JavaScript">
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                    alt="HTML5">
+                                <span>HTML5</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                    alt="CSS3">
+                                <span>CSS3</span>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg"
-                                alt="Tailwind CSS">
-                            <span>Tailwind CSS</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                                alt="JavaScript">
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-                                alt="PHP">
-                            <span>PHP</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"
-                                alt="Dart">
-                            <span>Dart</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                                alt="Python">
-                            <span>Python</span>
+                    <!-- Back-End -->
+                    <div class="skill-category">
+                        <h3>Back-End</h3>
+                        <div class="skill-row">
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/Laravel/Laravel-plain.svg"
+                                    alt="Laravel">
+                                <span>Laravel</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                                    alt="Node.js">
+                                <span>Node.js</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                    alt="Python">
+                                <span>Python</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="skill-row">
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-                                alt="CSS3">
-                            <span>CSS3</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg"
-                                alt="Bootstrap">
-                            <span>Bootstrap</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                                alt="React">
-                            <span>ReactJS</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg"
-                                alt="Laravel">
-                            <span>Laravel</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
-                                alt="Flutter">
-                            <span>Flutter</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-                                alt="Java">
-                            <span>Java</span>
-                        </div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
-                                alt="Firebase">
-                            <span>Firebase</span>
-                        </div>
 
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                                alt="MySQL">
-                            <span>MySQL</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="Oracle">
-                            <span>Oracle</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/UML_logo.svg/2048px-UML_logo.svg.png"
-                                alt="UML">
-                            <span>UML</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-                                alt="Git">
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
-                                alt="Linux">
-                            <span>Linux</span>
+                    <!-- Base de données -->
+                    <div class="skill-category">
+                        <h3>Base de données</h3>
+                        <div class="skill-row">
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                                    alt="MongoDB">
+                                <span>MongoDB</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                    alt="MySQL">
+                                <span>MySQL</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
+                                    alt="Firebase">
+                                <span>Firebase</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="skill-row">
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg"
-                                alt="Windows">
-                            <span>Windows</span>
+
+                    <!-- API & Microservices -->
+                    <div class="skill-category">
+                        <h3>API & Microservices</h3>
+                        <div class="skill-row">
+                            <div class="skill-item api-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg"
+                                    alt="GraphQL">
+                                <span>GraphQL</span>
+                            </div>
+                            <div class="skill-item api-item">
+                                <i class="fas fa-cloud" style="font-size: 3rem; color: #61DAFB;"></i>
+                                <span>REST</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cloud & DevOps -->
+                    <div class="skill-category">
+                        <h3>Cloud & DevOps</h3>
+                        <div class="skill-row">
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg"
+                                    alt="AWS">
+                                <span>AWS</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                                    alt="Kubernetes">
+                                <span>Kubernetes</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                                    alt="Git">
+                                <span>CI/CD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gestion Projet -->
+                    <div class="skill-category">
+                        <h3>Gestion Projet</h3>
+                        <div class="skill-row">
+                            <div class="skill-item">
+                                <i class="fas fa-project-diagram" style="font-size: 3rem; color: #61DAFB;"></i>
+                                <span>Agile (Scrum)</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg"
+                                    alt="Trello">
+                                <span>Trello</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outils & Logiciels -->
+                    <div class="skill-category">
+                        <h3>Outils & Logiciels</h3>
+                        <div class="skill-row">
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+                                    alt="Figma">
+                                <span>Figma</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg"
+                                    alt="Notion">
+                                <span>Notion</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"
+                                    alt="Postman">
+                                <span>Postman</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Power_bi_logo_black.svg/1200px-Power_bi_logo_black.svg.png"
+                                    alt="VisualParadigm">
+                                <span>VisualParadigm</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1049,104 +1519,224 @@
                 <h2 class="section-title" data-fr="Mes projets" data-en="My Portfolio">Mes projets</h2>
                 <div class="projects-container">
                     <div class="projects-slider">
+                        <!-- Projet 1 -->
                         <div class="project-card">
-                            <div class="project-image"></div>
+                            <div class="project-image-container">
+                                <img class="project-image" src="./Images/StationFlow.png" alt="StationFlow Dashboard">
+                            </div>
                             <div class="project-info">
-                                <h3 class="project-title">Nom du Projet 2</h3>
-                                <p>Description détaillée du projet, technologies utilisées, défis rencontrés et
-                                    solutions
-                                    apportées.</p>
+                                <h3 class="project-title" data-fr="StationFlow" data-en="StationFlow">
+                                    StationFlow
+                                </h3>
+                                <p data-fr="StationFlow est une plateforme de gestion dédiée aux stations-service, permettant d'automatiser la génération de rapports journaliers sur les ventes, les stocks, et la performance des stations."
+                                    data-en="StationFlow is a management platform dedicated to gas stations, automating the generation of daily reports on sales, inventory, and station performance.">
+                                    Plateforme de gestion dédiée aux stations-service, pour la gestion interne et la
+                                    génération de rapports journaliers sur les ventes, les stocks, et
+                                    la performance des stations.
+                                </p>
                                 <div class="project-tags">
-                                    <span class="project-tag">Vue.js</span>
-                                    <span class="project-tag">Express</span>
-                                    <span class="project-tag">PostgreSQL</span>
+                                    <span class="project-tag">Laravel</span>
+                                    <span class="project-tag">Bootstrap</span>
+                                    <span class="project-tag">MySQL</span>
                                 </div>
                                 <div class="project-links">
-                                    <a href="#" target="_blank">Demo</a>
-                                    <a href="#" target="_blank">GitHub</a>
+                                    <a href="stationFlow.html" target="_blank">Voir plus</a>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Projet 2 -->
                         <div class="project-card">
-                            <div class="project-card">
-                                <div class="project-image"></div>
-                                <div class="project-info">
-                                    <h3 class="project-title">Nom du Projet 2</h3>
-                                    <p>Description détaillée du projet, technologies utilisées, défis rencontrés et
-                                        solutions
-                                        apportées.</p>
-                                    <div class="project-tags">
-                                        <span class="project-tag">Vue.js</span>
-                                        <span class="project-tag">Express</span>
-                                        <span class="project-tag">PostgreSQL</span>
-                                    </div>
-                                    <div class="project-links">
-                                        <a href="#" target="_blank">Demo</a>
-                                        <a href="#" target="_blank">GitHub</a>
-                                    </div>
+                            <div class="project-image-container">
+                                <img class="project-image" src="./Images/favicon.png" alt="MainduCoeur Dashboard">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title" data-fr="MainduCoeur" data-en="HandOfHeart">
+                                    MainsduCoeur
+                                </h3>
+                                <p data-fr="Plateforme dédiée à la collecte de fonds pour soutenir les orphelins, permettant aux donateurs de contribuer facilement à des projets humanitaires et éducatifs en faveur des enfants dans le besoin."
+                                    data-en="A platform dedicated to fundraising for supporting orphans, enabling donors to easily contribute to humanitarian and educational projects for children in need.">
+                                    Plateforme dédiée à la collecte de fonds pour soutenir les orphelins, permettant aux
+                                    donateurs de contribuer facilement à des projets humanitaires et éducatifs en faveur
+                                    des enfants dans le besoin.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">HTML5</span>
+                                    <span class="project-tag">CSS3</span>
+                                    <span class="project-tag">JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="mainsducoeur.html" target="_blank">Voir plus</a>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Projet 3 -->
                         <div class="project-card">
-                            <div class="project-card">
-                                <div class="project-image"></div>
-                                <div class="project-info">
-                                    <h3 class="project-title">Nom du Projet 2</h3>
-                                    <p>Description détaillée du projet, technologies utilisées, défis rencontrés et
-                                        solutions
-                                        apportées.</p>
-                                    <div class="project-tags">
-                                        <span class="project-tag">Vue.js</span>
-                                        <span class="project-tag">Express</span>
-                                        <span class="project-tag">PostgreSQL</span>
-                                    </div>
-                                    <div class="project-links">
-                                        <a href="#" target="_blank">Demo</a>
-                                        <a href="#" target="_blank">GitHub</a>
-                                    </div>
+                            <div class="project-image-container">
+                                <img class="project-image" src="/api/placeholder/400/320" alt="FarmSense Dashboard">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title" data-fr="FarmSense" data-en="FarmSense">
+                                    FarmSense
+                                </h3>
+                                <p data-fr="Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques, et d'optimiser la commercialisation grâce à l'analyse des tendances du marché."
+                                    data-en="Crop monitoring platform allowing farmers to track the growth of their crops, soil moisture, weather conditions, and optimize marketing through market trend analysis.">
+                                    Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer
+                                    la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques,
+                                    et d'optimiser la commercialisation grâce à l'analyse des tendances du marché.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">ReactJS</span>
+                                    <span class="project-tag">MySQL</span>
+                                    <span class="project-tag">Laravel</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Voir plus</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- Plus de projets ici -->
+
+                        <!-- Projet 4 -->
+                        <div class="project-card">
+                            <div class="project-image-container">
+                                <img class="project-image" src="/api/placeholder/400/320"
+                                    alt="SuperMarketHub Dashboard">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title" data-fr="SuperMarketHub" data-en="SuperMarketHub">
+                                    SuperMarketHub
+                                </h3>
+                                <p data-fr="SuperMarketHub est une plateforme innovante qui regroupe plusieurs supermarchés, permettant aux clients de vérifier en temps réel la disponibilité des produits dans les magasins proches de chez eux. Grâce à cette solution, les utilisateurs gagnent du temps en accédant facilement aux informations sur les stocks, les promotions et les horaires des supermarchés locaux, le tout à portée de main."
+                                    data-en="SuperMarketHub is an innovative platform bringing together multiple supermarkets, allowing customers to check product availability in nearby stores in real time. This solution saves users time by providing easy access to stock information, promotions, and supermarket opening hours, all at their fingertips.">
+                                    SuperMarketHub est une plateforme innovante qui regroupe plusieurs supermarchés,
+                                    permettant aux clients de vérifier en temps réel la disponibilité des produits dans
+                                    les magasins proches de chez eux. Grâce à cette solution, les utilisateurs gagnent
+                                    du temps en accédant facilement aux informations sur les stocks, les promotions et
+                                    les horaires des supermarchés locaux, le tout à portée de main.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">Bootstrap</span>
+                                    <span class="project-tag">Php</span>
+                                    <span class="project-tag">PhpMyAdmin</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Voir plus</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Projet 5 -->
+                        <div class="project-card">
+                            <div class="project-image-container">
+                                <img class="project-image" src="/api/placeholder/400/320" alt="FarmSense Dashboard">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title" data-fr="FarmSense" data-en="FarmSense">
+                                    SP-QRcode
+                                </h3>
+                                <p data-fr="Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques, et d'optimiser la commercialisation grâce à l'analyse des tendances du marché."
+                                    data-en="Crop monitoring platform allowing farmers to track the growth of their crops, soil moisture, weather conditions, and optimize marketing through market trend analysis.">
+                                    Crop monitoring platform allowing farmers to track the growth of their crops, soil
+                                    moisture, weather conditions, and optimize marketing through market trend analysis.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">Dart</span>
+                                    <span class="project-tag">API</span>
+                                    <span class="project-tag">Laravel</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Voir plus</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Projet 6 -->
+                        <div class="project-card">
+                            <div class="project-image-container">
+                                <img class="project-image" src="/api/placeholder/400/320" alt="FarmSense Dashboard">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title" data-fr="FarmSense" data-en="FarmSense">
+                                    Catalogue
+                                </h3>
+                                <p data-fr="Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques, et d'optimiser la commercialisation grâce à l'analyse des tendances du marché."
+                                    data-en="Crop monitoring platform allowing farmers to track the growth of their crops, soil moisture, weather conditions, and optimize marketing through market trend analysis.">
+                                    Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer
+                                    la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques,
+                                    et d'optimiser la commercialisation grâce à l'analyse des tendances du marché.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">ReactJS</span>
+                                    <span class="project-tag">MySQL</span>
+                                    <span class="project-tag">Laravel</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Voir plus</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Projet 7 -->
+                        <div class="project-card">
+                            <div class="project-image-container">
+                                <img class="project-image" src="/api/placeholder/400/320" alt="FarmSense Dashboard">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title" data-fr="FarmSense" data-en="FarmSense">
+                                    LivraisonExpress
+                                </h3>
+                                <p data-fr="Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques, et d'optimiser la commercialisation grâce à l'analyse des tendances du marché."
+                                    data-en="Crop monitoring platform allowing farmers to track the growth of their crops, soil moisture, weather conditions, and optimize marketing through market trend analysis.">
+                                    Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer
+                                    la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques,
+                                    et d'optimiser la commercialisation grâce à l'analyse des tendances du marché.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">ReactJS</span>
+                                    <span class="project-tag">MySQL</span>
+                                    <span class="project-tag">Laravel</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Voir plus</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Projet 8 -->
+                        <div class="project-card">
+                            <div class="project-image-container">
+                                <img class="project-image" src="/api/placeholder/400/320" alt="FarmSense Dashboard">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title" data-fr="FarmSense" data-en="FarmSense">
+                                    LifeInBlog
+                                </h3>
+                                <p data-fr="Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques, et d'optimiser la commercialisation grâce à l'analyse des tendances du marché."
+                                    data-en="Crop monitoring platform allowing farmers to track the growth of their crops, soil moisture, weather conditions, and optimize marketing through market trend analysis.">
+                                    Plateforme de suivi des cultures agricoles permettant aux agriculteurs de monitorer
+                                    la croissance de leurs cultures, l'humidité du sol, les conditions météorologiques,
+                                    et d'optimiser la commercialisation grâce à l'analyse des tendances du marché.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">ReactJS</span>
+                                    <span class="project-tag">MySQL</span>
+                                    <span class="project-tag">Laravel</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Voir plus</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="slider-controls">
-                        <button class="prev-btn">❮</button>
-                        <button class="next-btn">❯</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="experience">
-            <div class="container">
-                <h2 class="section-title" data-fr="Expérience" data-en="Experience">Expérience</h2>
-                <div class="experience-timeline">
-                    <div class="experience-item">
-                        <h3 class="experience-title">Analyse Informatique et programmation<span
-                                class="experience-company"> UAC-ENEAM</span></h3>
-                        <p class="experience-date">Novembre 2022 - Présent</p>
-                        <p>Description détaillée de vos responsabilités, projets réalisés et compétences acquises dans
-                    </div>
-                    <div class="experience-item">
-                        <h3 class="experience-title">Stage en développement web <span class="experience-company">
-                                Fun High Tech</span></h3>
-                        <p class="experience-date">Juin 2023 - Décembre 2023</p>
-                        <p>Description détaillée de vos responsabilités, projets réalisés et compétences acquises durant
-                            ce stage.</p>
-                    </div>
-                    <div class="experience-item">
-                        <h3 class="experience-title">Stage en sécurité réseau et système <span
-                                class="experience-company"> TBC Group</span></h3>
-                        <p class="experience-date">Septembre 2022 - Mai 2023</p>
-                        <p>Description détaillée du projet académique, technologies utilisées, rôle dans l'équipe et
-                            résultats obtenus.</p>
-                    </div>
+
                 </div>
             </div>
         </section>
 
         <section id="contact">
             <div class="container">
-                <h2 class="section-title">Contact</h2>
+                <h2 class="section-title">Contacts</h2>
                 <div class="contact-info">
                     <div class="contact-card">
                         <div class="contact-icon">
@@ -1166,6 +1756,7 @@
                             <a href="tel:+2290191075712">+229 0191075712</a>
                         </div>
                     </div>
+
                     <div class="contact-card">
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
@@ -1181,20 +1772,20 @@
                         </div>
                         <h3 class="contact-title">Réseaux Sociaux</h3>
                         <div class="contact-socials">
-                            <a href="https://github.com/GuerindaGG" target="_blank" title="GitHub">
+                            <a href="https://github.com/GuerindaGG" target="_blank" title="GitHub" class="social-link">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="https://www.linkedin.com/in/guerinda-gohoue" target="_blank" title="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
+                            <a href="https://www.linkedin.com/in/guerinda-gohoue" target="_blank" title="LinkedIn"
+                                class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://facebook.com/GuerindaG" target="_blank" title="Twitter">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            <a href="https://www.instagram.com/guerinda_dev" target="_blank" title="Instagram">
-                                <i class="fab fa-instagram"></i>
+                            <a href="https://facebook.com/GuerindaG" target="_blank" title="Facebook"
+                                class="social-link">
+                                <i class="fab fa-facebook-f"></i>
                             </a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -1205,8 +1796,6 @@
     </footer>
 
     <script>
-
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1216,7 +1805,6 @@
             });
         });
 
-        // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('nav ul');
 
@@ -1248,42 +1836,6 @@
                     link.classList.add('active');
                 }
             });
-        });
-
-        const slider = document.querySelector('.projects-slider');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        const cards = document.querySelectorAll('.project-card');
-        const cardWidth = cards[0].offsetWidth + 32; // width + gap
-        let currentIndex = 0;
-
-        nextBtn.addEventListener('click', () => {
-            if (currentIndex < cards.length - 3) {
-                currentIndex++;
-                updateSliderPosition();
-            }
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSliderPosition();
-            }
-        });
-
-        function updateSliderPosition() {
-            slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-        }
-
-        // Responsive handling
-        window.addEventListener('resize', () => {
-            // Recalculate card width on resize
-            const newCardWidth = cards[0].offsetWidth + 32;
-            if (newCardWidth !== cardWidth) {
-                // Reset position if needed
-                currentIndex = 0;
-                updateSliderPosition();
-            }
         });
 
         // Theme toggle
@@ -1343,37 +1895,85 @@
             tempLink.click();
         });
 
-        // Stats Animation
-        function animateStats() {
-            const statElements = document.querySelectorAll('.stat-value');
-            statElements.forEach(stat => {
-                const targetValue = parseInt(stat.getAttribute('data-count'));
-                let currentValue = 0;
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.querySelector('.projects-slider');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const dotsContainer = document.querySelector('.slider-dots');
+            const cards = document.querySelectorAll('.project-card');
 
-                const interval = setInterval(() => {
-                    if (currentValue >= targetValue) {
-                        clearInterval(interval);
-                        return;
-                    }
+            let currentIndex = 0;
 
-                    currentValue++;
-                    stat.textContent = currentValue;
-                }, 100);
+            // Générer les points (dots) en fonction du nombre de projets
+            dotsContainer.innerHTML = ''; // Effacer les points existants
+            cards.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSliderView();
+                });
+                dotsContainer.appendChild(dot);
             });
-        }
 
-        // Déclencher l'animation quand la section est visible
-        const statsSection = document.querySelector('.stats-section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    observer.unobserve(entry.target);
+            // Récupérer les points après les avoir générés
+            const dots = document.querySelectorAll('.slider-dot');
+
+            // Configure for mobile vs desktop
+            function updateSliderView() {
+                const isMobile = window.innerWidth <= 768;
+                if (isMobile) {
+                    // On mobile, show one card at a time
+                    slider.style.flexDirection = 'column';
+                    cards.forEach((card, index) => {
+                        card.style.display = index === currentIndex ? 'block' : 'none';
+                    });
+                } else {
+                    // On desktop, show all cards horizontally
+                    slider.style.flexDirection = 'row';
+                    cards.forEach(card => {
+                        card.style.display = 'block';
+                    });
+
+                    // Scroll to the current card
+                    const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(cards[0]).marginRight);
+                    slider.scrollLeft = currentIndex * cardWidth;
+                }
+
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            // Initialize slider
+            updateSliderView();
+
+            // Add event listeners
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                updateSliderView();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % cards.length;
+                updateSliderView();
+            });
+
+            // Handle keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                    updateSliderView();
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    updateSliderView();
                 }
             });
-        });
 
-        observer.observe(statsSection);
+            // Handle window resize
+            window.addEventListener('resize', updateSliderView);
+        });
     </script>
 </body>
 
