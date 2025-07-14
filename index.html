@@ -265,14 +265,14 @@
 
         /* About section améliorée */
         #about .container {
-            text-align: left;
+            text-align: center;
         }
 
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr 300px;
+            grid-template-columns: 1fr 400px;
             gap: 4rem;
             align-items: center;
+            text-align: center;
             margin-bottom: 3rem;
         }
 
@@ -280,67 +280,7 @@
             margin-bottom: 1.5rem;
             color: var(--secondary-color);
             font-size: 1.1rem;
-            text-align: justify;
-        }
-
-        .about-image-gradient {
-            width: 300px;
-            height: 400px;
-            padding: 3px;
-            background: var(--gradient-primary);
-            border-radius: 20px;
-            position: relative;
-        }
-
-        .about-image-gradient .image-container {
-            width: 100%;
-            height: 100%;
-            border-radius: 17px;
-            overflow: hidden;
-            background: white;
-        }
-
-        .about-image-gradient img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Personal info améliorée */
-        .personal-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 2px solid rgba(0, 217, 255, 0.2);
-        }
-
-        .info-item {
-            background: var(--gradient-card);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .info-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-card);
-        }
-
-        .info-item .label {
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .info-item .value {
-            font-weight: 600;
-            font-size: 1.1rem;
+            text-align: center;
         }
 
         /* Formation section (nouvelle) */
@@ -465,54 +405,6 @@
             }
         }
 
-        /* Expérience section améliorée */
-        .experience-timeline {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .experience-item {
-            background: var(--gradient-card);
-            margin-bottom: 2rem;
-            padding: 2.5rem;
-            border-radius: 15px;
-            border-left: 5px solid var(--accent-color);
-            box-shadow: var(--shadow-card);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .experience-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .experience-title {
-            font-size: 1.4rem;
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .experience-company {
-            color: var(--accent-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .experience-date {
-            color: var(--secondary-color);
-            font-size: 0.95rem;
-            margin: 0.5rem 0 1.5rem 0;
-            font-weight: 500;
-        }
-
-        .experience-description {
-            color: var(--secondary-color);
-            line-height: 1.7;
-            text-align: justify;
-        }
-
         /* Skills section améliorée */
         .skills-container {
             display: flex;
@@ -614,72 +506,6 @@
                 width: 40px;
                 height: 40px;
             }
-        }
-
-        /* Hobbies améliorés */
-        .hobbies-section {
-            margin-top: 4rem;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--accent-color);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-subtitle::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-        }
-
-        .hobbies-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            justify-items: center;
-        }
-
-        .hobby-item {
-            background: var(--gradient-card);
-            padding: 2rem 1.5rem;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            max-width: 180px;
-        }
-
-        .hobby-item:hover {
-            transform: translateY(-10px) rotate(2deg);
-            box-shadow: var(--shadow-card);
-        }
-
-        .hobby-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            color: white;
-            font-size: 1.8rem;
-            transition: all 0.3s ease;
-        }
-
-        .hobby-item:hover .hobby-icon {
-            transform: scale(1.2);
         }
 
         /* Projects section améliorée */
@@ -892,14 +718,19 @@
             background: #333;
             color: white;
         }
-
         .social-link:nth-child(2):hover {
+            /* Gitlab */
+            background: #f06603;
+            color: rgb(255, 255, 255);
+        }
+
+        .social-link:nth-child(3):hover {
             /* LinkedIn */
             background: #0077b5;
             color: white;
         }
 
-        .social-link:nth-child(3):hover {
+        .social-link:nth-child(4):hover {
             /* Facebook */
             background: #4267B2;
             color: white;
@@ -1063,9 +894,7 @@
 
 <body>
     <header>
-        <div class="logo">
-            Guér<span>inda</span>
-        </div>
+        <div class="logo"><a href="#home">Guér<span>inda</span></a></div>
         <div class="header-right">
             <div class="toggles">
                 <div class="theme-toggle" id="theme-toggle">
@@ -1076,8 +905,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#home">Accueil</a></li>
-                <li><a href="#formation">Mon parcours</a></li>
+                <li><a href="#formation">A propos</a></li>
                 <li><a href="#skills">Compétences</a></li>
                 <li><a href="#projects">Mes projets</a></li>
                 <li><a href="#contact">Contacts</a></li>
@@ -1115,112 +943,22 @@
             <div class="container">
                 <h2 class="section-title">À propos de moi</h2>
                 <div class="about-content">
-                    <div class="about-text">
-                        <p>
-                            Étudiante passionnée en Informatique de gestion avec une spécialisation en analyse
-                            informatique et programmation. Mon parcours m'a permis de développer une solide expertise en
-                            développement fullstack, combinant à la fois les aspects frontend et backend.
-                        </p>
-                        <p>
-                            Ma formation m'a donné une approche analytique des problématiques informatiques, me
-                            permettant de concevoir des architectures robustes et des solutions adaptées aux besoins des
-                            utilisateurs.
-                        </p>
-                        <p>
-                            En dehors du code, j'ai plusieurs centres d'intérêts et je suis toujours à la recherche de
-                            nouveaux défis techniques à relever. Mon objectif est de contribuer à des projets innovants
-                            qui ont un impact positif sur la société.
-                        </p>
-                    </div>
-                    <div class="about-image-gradient">
-                        <div class="image-container">
-                            <img src="./Images/WhatsApp Image 2025-03-31 à 13.09.24_3a7815c9.jpg" alt="Photo de profil">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Personal Info Section -->
-                <div class="personal-info">
-                    <div class="info-item">
-                        <span class="label" data-fr="Nom" data-en="Name">Nom</span>br
-                        <span class="value">GOHOUE</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label" data-fr="Prénom" data-en="Firstname">Prénom</span>
-                        <span class="value">Guérinda</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label" data-fr="Âge" data-en="Age">Âge</span>
-                        <span class="value">20 ans</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label" data-fr="Nationalité" data-en="Nationality">Nationalité</span>
-                        <span class="value">Béninoise</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label" data-fr="Langues" data-en="Languages">Langues</span>
-                        <span class="value" data-fr="Fon, Français, Anglais" data-en="Fon, French, English">Fon, Minan,
-                            Français, Anglais</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">Email</span>
-                        <span class="value">guerindagohoue@gmail.com</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">GitHub</span>
-                        <span class="value">GuerindaGG</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label" data-fr="Disponibilité" data-en="Availability">Disponibilité</span>
-                        <span class="value" data-fr="Disponible" data-en="Available">Disponible</span>
-                    </div>
-                </div>
-                <div class="hobbies-section">
-                    <h3 class="section-subtitle">Mes centres d'intérêt</h3>
-                    <div class="hobbies-container">
-                        <div class="hobby-item">
-                            <div class="hobby-icon">
-                                <i class="fas fa-dumbbell"></i>
-                            </div>
-                            <span>Fitness</span>
-                        </div>
-                        <!--div class="hobby-item">
-                            <div class="hobby-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <span>Lecture</span>
-                        </div-->
-                        <div class="hobby-item">
-                            <div class="hobby-icon">
-                                <i class="fas fa-pencil-alt"></i>
-                            </div>
-                            <span>Écriture</span>
-                        </div>
-                        <div class="hobby-item">
-                            <div class="hobby-icon">
-                                <i class="fas fa-camera"></i>
-                            </div>
-                            <span>Photographie</span>
-                        </div>
-                        <div class="hobby-item">
-                            <div class="hobby-icon">
-                                <i class="fas fa-hand-scissors"></i>
-                            </div>
-                            <span>Tricotage</span>
-                        </div>
-                        <div class="hobby-item">
-                            <div class="hobby-icon">
-                                <i class="fas fa-music"></i>
-                            </div>
-                            <span>Musique</span>
-                        </div>
-                        <div class="hobby-item">
-                            <div class="hobby-icon">
-                                <i class="fas fa-bicycle"></i>
-                            </div>
-                            <span>Cyclisme</span>
-                        </div>
-                    </div>
+                    <p>
+                        Étudiante passionnée en Informatique de gestion avec une spécialisation en analyse
+                        informatique et programmation. Mon parcours m'a permis de développer une solide expertise en
+                        développement fullstack, combinant à la fois les aspects frontend et backend.
+                    </p>
+                    <p>
+                        Ma formation m'a donné une approche analytique des problématiques informatiques, me
+                        permettant de concevoir des architectures robustes et des solutions adaptées aux besoins des
+                        utilisateurs.
+                    </p>
+                    <p>
+                        En dehors du code, j'ai plusieurs centres d'intérêts comme le tricottage et lecture. Je suis
+                        toujours à la recherche de
+                        nouveaux défis techniques à relever. Mon objectif est de contribuer à des projets innovants
+                        qui ont un impact positif sur la société.
+                    </p>
                 </div>
         </section>
 
@@ -1265,90 +1003,18 @@
             </div>
         </section>
 
-        <section id="experience">
-            <div class="container">
-                <h2 class="section-title" data-fr="Expériences" data-en="Experiences">Expériences
-                </h2>
-                <div class="experience-timeline col-lg-6">
-                    <div class="experience-item">
-                        <h3 class="experience-title" data-fr="Analyse Informatique et Programmation"
-                            data-en="Computer Science and Programming">
-                            Analyse Informatique et Programmation
-                            <span class="experience-company" data-fr="UAC-ENEAM" data-en="UAC-ENEAM">UAC-ENEAM</span>
-                        </h3>
-                        <p class="experience-date" data-fr="Novembre 2022 - Présent" data-en="November 2022 - Present">
-                            Novembre 2022 - Présent
-                        </p>
-                        <p data-fr="Formation approfondie en analyse des systèmes d'information, conception d'applications, programmation web et mobile, gestion de bases de données, et initiation à l'administration réseau."
-                            data-en="Advanced training in information systems analysis, application design, web and mobile programming, database management, and introduction to network administration.">
-                            Formation approfondie en analyse des systèmes d'information, conception d'applications,
-                            programmation web et mobile, gestion de bases de données, et initiation à
-                            l'administration
-                            réseau.
-                        </p>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="experience-title" data-fr="Stage en Développement Web"
-                            data-en="Web Development Internship">
-                            Stage en Développement Web
-                            <span class="experience-company" data-fr="Fun High Tech" data-en="Fun High Tech">Fun
-                                High
-                                Tech</span>
-                        </h3>
-                        <p class="experience-date" data-fr="Juin 2023 - Décembre 2023"
-                            data-en="June 2023 - December 2023">
-                            Juin 2023 - Décembre 2023
-                        </p>
-                        <p data-fr="Développement d'une plateforme de gestion de supermarchés. Compétences acquises en PHP, MySQL, Bootstrap et bases du développement mobile. Participation à la conception de solutions web adaptées aux besoins des utilisateurs."
-                            data-en="Development of a supermarket management platform. Skills acquired in PHP, MySQL, Bootstrap, and basics of mobile development. Participated in designing web solutions tailored to user needs.">
-                            Développement d'une plateforme de gestion de supermarchés. Compétences acquises en PHP,
-                            MySQL, Bootstrap et bases du développement mobile. Participation à la conception de
-                            solutions web adaptées aux besoins des utilisateurs.
-                        </p>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="experience-title" data-fr="Stage en Sécurité Réseau et Système"
-                            data-en="Network and System Security Internship">
-                            Stage en Sécurité Réseau et Système
-                            <span class="experience-company" data-fr="TBC Group" data-en="TBC Group">TBC
-                                Group</span>
-                        </h3>
-                        <p class="experience-date" data-fr="Septembre 2022 - Mai 2023"
-                            data-en="September 2022 - May 2023">
-                            Septembre 2022 - Mai 2023
-                        </p>
-                        <p data-fr="Interventions sur la maintenance informatique, configuration d'équipements réseau (routeurs, switchs), installation de caméras de surveillance, et initiation à la sécurité des systèmes d'information."
-                            data-en="Involved in IT maintenance operations, configuration of network equipment (routers, switches), installation of surveillance cameras, and introduction to information system security.">
-                            Interventions sur la maintenance informatique, configuration d'équipements réseau
-                            (routeurs,
-                            switchs), installation de caméras de surveillance, et initiation à la sécurité des
-                            systèmes
-                            d'information.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="skills">
             <div class="container">
                 <h2 class="section-title" data-fr="Compétences" data-en="Skills">Mes compétences techniques</h2>
                 <div class="skills-container">
                     <!-- Front-End -->
                     <div class="skill-category">
-                        <h3>Front-End</h3>
+                        <h3>Stack</h3>
                         <div class="skill-row">
                             <div class="skill-item">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
                                     alt="React">
                                 <span>React</span>
-                            </div>
-                            <div class="skill-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
-                                    alt="Angular">
-                                <span>Angular</span>
                             </div>
                             <div class="skill-item">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
@@ -1380,39 +1046,15 @@
                                     alt="CSS3">
                                 <span>CSS3</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Back-End -->
-                    <div class="skill-category">
-                        <h3>Back-End</h3>
-                        <div class="skill-row">
                             <div class="skill-item">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/Laravel/Laravel-plain.svg"
                                     alt="Laravel">
                                 <span>Laravel</span>
                             </div>
                             <div class="skill-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                                    alt="Node.js">
-                                <span>Node.js</span>
-                            </div>
-                            <div class="skill-item">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
                                     alt="Python">
                                 <span>Python</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Base de données -->
-                    <div class="skill-category">
-                        <h3>Base de données</h3>
-                        <div class="skill-row">
-                            <div class="skill-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
-                                    alt="MongoDB">
-                                <span>MongoDB</span>
                             </div>
                             <div class="skill-item">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
@@ -1424,76 +1066,19 @@
                                     alt="Firebase">
                                 <span>Firebase</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- API & Microservices -->
-                    <div class="skill-category">
-                        <h3>API & Microservices</h3>
-                        <div class="skill-row">
-                            <div class="skill-item api-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg"
-                                    alt="GraphQL">
-                                <span>GraphQL</span>
-                            </div>
                             <div class="skill-item api-item">
                                 <i class="fas fa-cloud" style="font-size: 3rem; color: #61DAFB;"></i>
                                 <span>REST</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cloud & DevOps -->
-                    <div class="skill-category">
-                        <h3>Cloud & DevOps</h3>
-                        <div class="skill-row">
-                            <div class="skill-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg"
-                                    alt="AWS">
-                                <span>AWS</span>
-                            </div>
-                            <div class="skill-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
-                                    alt="Kubernetes">
-                                <span>Kubernetes</span>
-                            </div>
-                            <div class="skill-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-                                    alt="Git">
-                                <span>CI/CD</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Gestion Projet -->
-                    <div class="skill-category">
-                        <h3>Gestion Projet</h3>
-                        <div class="skill-row">
-                            <div class="skill-item">
-                                <i class="fas fa-project-diagram" style="font-size: 3rem; color: #61DAFB;"></i>
-                                <span>Agile (Scrum)</span>
                             </div>
                             <div class="skill-item">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg"
                                     alt="Trello">
                                 <span>Trello</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Outils & Logiciels -->
-                    <div class="skill-category">
-                        <h3>Outils & Logiciels</h3>
-                        <div class="skill-row">
                             <div class="skill-item">
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
                                     alt="Figma">
                                 <span>Figma</span>
-                            </div>
-                            <div class="skill-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg"
-                                    alt="Notion">
-                                <span>Notion</span>
                             </div>
                             <div class="skill-item">
                                 <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"
@@ -1592,7 +1177,7 @@
                                     <a href="#" target="_blank">Voir plus</a>
                                 </div>
                             </div>
-                                            </div>
+                        </div>
 
                         <!-- Projet 4 -->
                         <div class="project-card">
@@ -1763,29 +1348,23 @@
                             Abomey-Calavi, Bénin
                         </div>
                     </div>
-                    <div class="contact-card">
-                        <div class="contact-icon">
-                            <i class="fas fa-share-alt"></i>
-                        </div>
-                        <h3 class="contact-title">Réseaux Sociaux</h3>
-                        <div class="contact-socials">
-                            <a href="https://github.com/GuerindaGG" target="_blank" title="GitHub" class="social-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/guerinda-gohoue" target="_blank" title="LinkedIn"
-                                class="social-link">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://facebook.com/GuerindaG" target="_blank" title="Facebook"
-                                class="social-link">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
+        <div class="contact-socials">
+            <a href="https://github.com/GuerindaGG" target="_blank" title="GitHub" class="social-link">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://gitlab.com/GuerindaGG" target="_blank" title="Gitlab" class="social-link">
+                <i class="fab fa-gitlab"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/guerinda-gohoue" target="_blank" title="LinkedIn" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://facebook.com/GuerindaG" target="_blank" title="Facebook" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
     </main>
 
     <footer>
